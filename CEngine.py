@@ -1,6 +1,22 @@
-import os,time,keyboard
+import os,time
 
+KYBRD=True
+try:
+    import keyboard
+except:
+    print("ERROR: Keyboard Module not found !!!")
+    try:
+        print("Installing Keyboard...")
+        import pip
+        pip.main(['install','keyboard'])
+        import keyboard
+        print("Keyboard installed Sucessfully")
+    except:
+        KYBRD=False
+        print("ERROR: Failed to install Keyboard !!!")
+    time.sleep(3)
 
+    
 def clear():
     os.system('cls')
 
@@ -54,8 +70,10 @@ class display:
 
 
     def pressing(self,key):
-        return keyboard.is_pressed(str(key))    
-    
+        if KYBRD:
+            return keyboard.is_pressed(str(key))    
+        else:
+            return False
 
     def update(self,pause=0.05):
         image=""
